@@ -14,7 +14,7 @@ def main(project_dir):
     logger = logging.getLogger(__name__)
     logger.info('making final data set from raw data')
 
-    suffix = [0,1,2,3,4]
+    suffix = [0,1,2,3,4,5,6,7]
     base_path = os.path.join(project_dir, 'data/raw')
     images = []
     labels = []
