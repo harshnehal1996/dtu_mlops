@@ -11,7 +11,7 @@ import torch.optim as optim
 from features.build_features import mnist
 from model import MyAwesomeModel
 
-def train(lr):
+def train(lr : float):
     print("Training day and night")
     print(lr)
 

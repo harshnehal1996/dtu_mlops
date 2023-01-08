@@ -14,7 +14,7 @@ class Data(Dataset):
     def __len__(self):
         return len(self.labels)
     
-    def rotate(self, tensor):
+    def rotate(self, tensor : torch.FloatTensor) -> torch.FloatTensor:
         if np.random.randint(2):
             return torch.flip(tensor, [0]).T.unsqueeze(0)
         else:

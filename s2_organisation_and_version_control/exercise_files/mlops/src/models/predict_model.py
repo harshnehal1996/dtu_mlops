@@ -8,7 +8,7 @@ import torch
 from features.build_features import mnist
 from model import MyAwesomeModel
 
-def evaluate(model_checkpoint):
+def evaluate(model_checkpoint : str):
     print("Evaluating until hitting the ceiling")
     print(model_checkpoint)
 
