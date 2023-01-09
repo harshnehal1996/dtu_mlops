@@ -19,13 +19,16 @@ def train(lr : float):
     model = MyAwesomeModel()
     model.cuda()
     dataset, _ = mnist()
-    train_set, val_set = torch.utils.data.random_split(dataset, [20000, 5000])
+    n = len(dataset)
+    tslen = int(n / 4)
+    trlen = n - tslen
+    train_set, val_set = torch.utils.data.random_split(dataset, [trlen, tslen])
     optimizer = optim.Adam(model.parameters(), lr=lr, betas=(0.5, 0.999))
     trainloader = torch.utils.data.DataLoader(train_set, batch_size=64, shuffle=True, pin_memory=True)  
     valloader = torch.utils.data.DataLoader(val_set, batch_size=64)
     save_path = os.path.join(get_project_dir(), 'models')
 
-    epoch = 40
+    epoch = 1
     loss_fn = nn.NLLLoss()
 
     for i in range(epoch):
@@ -63,7 +66,7 @@ def train(lr : float):
 
 if __name__ == "__main__":
     parser = argparse.ArgumentParser(description='train script')
-    parser.add_argument('--lr', default=0.03, nargs=1, help='learning rate')
+    parser.add_argument('--lr', default=0.03, help='learning rate', type=float)
     args = parser.parse_args()
     train(args.lr)
 
