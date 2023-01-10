@@ -1,6 +1,6 @@
 import sys
 import os
-from helper import get_source_dir, get_project_dir
+from .helper import get_source_dir, get_project_dir
 sys.path.append(get_source_dir())
 
 import argparse
@@ -11,7 +11,7 @@ import torch.optim as optim
 from features.build_features import mnist
 from model import MyAwesomeModel
 
-def train(lr : float):
+def train(lr : float) -> None:
     print("Training day and night")
     print(lr)
 

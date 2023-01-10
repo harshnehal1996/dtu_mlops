@@ -30,4 +30,6 @@ class MyAwesomeModel(nn.Module):
                       nn.LogSoftmax(dim=-1))
     
     def forward(self, inputs):
+        if inputs.ndim != 4:
+            raise ValueError("Expected 4D tensor, got %dD tensor instead" % inputs.ndim)
         return self.model(inputs)

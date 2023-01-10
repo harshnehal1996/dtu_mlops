@@ -6,6 +6,7 @@ from models.helper import get_project_dir
 from torch.utils.data import Dataset
 
 class Data(Dataset):
+
     def __init__(self, image, label, transform_probability=0.2):
         self.images = image
         self.labels = label
@@ -21,7 +22,8 @@ class Data(Dataset):
             return torch.flip(tensor, [1]).T.unsqueeze(0)
 
     def __getitem__(self, idx):        
-        if global_vars.isTrain and self.labels[idx].item() != 6 and self.labels[idx].item() != 9 and np.random.uniform() < self.transform_probability:
+        if global_vars.isTrain and self.labels[idx].item() != 6 and self.labels[idx].item() != 9\
+                                            and np.random.uniform() < self.transform_probability:
             return self.rotate(self.images[idx]), self.labels[idx]
         
         return self.images[[idx]], self.labels[idx]
