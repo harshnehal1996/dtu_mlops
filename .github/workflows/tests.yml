@@ -35,12 +35,18 @@ jobs:
         echo "::set-output name=dir::$(pip cache dir)"
     
     - name: Cache dependencies
+      id : cache-pip
       uses: actions/cache@v3
       with:
         path: ${{ steps.pip-cache.outputs.dir }}
-        key: ${{ matrix.os }}-py${{ matrix.python-version }}-pt${{ matrix.pytorch-version }}-pip-${{ hashFiles('**/requirements.txt') }}
+        key: ${{ matrix.os }}-py${{ matrix.python-version }}-pt${{ matrix.pytorch-version }}-pip-${{ hashFiles('**/requirements.txt') }}-${{ hashFiles('**/requirements_tests.txt') }}
         restore-keys: |
           ${{ matrix.os }}-py${{ matrix.python-version }}-pt${{ matrix.pytorch-version }}-pip-
+    
+    - name: Display Output
+      run: |
+        echo ${{ steps.cache-pip.outputs.cache-hit }}
+        echo ${{ hashFiles('**/requirements.txt') }}
 
     - name: Install dependencies
       run: |
