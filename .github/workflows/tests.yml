@@ -6,6 +6,10 @@ on:
   pull_request:
     branches: [ master, main ]
 
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}-${{ github.head_ref }}
+  cancel-in-progress: true
+
 jobs:
   build:
 
@@ -44,8 +48,10 @@ jobs:
           ${{ matrix.os }}-py${{ matrix.python-version }}-pt${{ matrix.pytorch-version }}-pip-
     
     - name: Display Output
+      env: 
+        HAS_CACHED: ${{ steps.cache-pip.outputs.cache-hit }}
       run: |
-        echo ${{ steps.cache-pip.outputs.cache-hit }}
+        echo "$HAS_CACHED"
         echo ${{ hashFiles('**/requirements.txt') }}
 
     - name: Install dependencies
