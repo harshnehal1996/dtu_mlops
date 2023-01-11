@@ -12,7 +12,7 @@ def test_model():
     with torch.no_grad():
         inputs = torch.randn(1,1,28,28)
         output = model(inputs)
-        assert tuple(output.shape) == (1,11)
+        assert tuple(output.shape) == (1,12)
 
 def test_error_on_wrong_shape():
     model = MyAwesomeModel()
