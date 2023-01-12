@@ -17,5 +17,4 @@ def test_model():
 def test_error_on_wrong_shape():
     model = MyAwesomeModel()
     with pytest.raises(ValueError, match=r"Expected 4D tensor, got [1-9][0-9]*D tensor instead"):
-        model(torch.randn(1,28,28))
-
+        model(torch.randn(1,28,29))
